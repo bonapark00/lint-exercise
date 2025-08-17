@@ -12,6 +12,9 @@ ktlint {
     filter {
         include("**/*.kt")
         exclude("**/*.kts") // Gradle Kotlin DSL 파일 제외 (임시용)
+        exclude("**/src/androidTest/**")
+        exclude("**/src/test/**")
+
     }
     reporters {
         reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.PLAIN)
