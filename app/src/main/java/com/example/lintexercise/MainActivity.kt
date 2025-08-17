@@ -1,6 +1,5 @@
 package com.example.lintexercise
 
-
 // Import issues below are intentional for ktlint:
 import androidx.compose.material3.Text          // <- out of order (will be sorted)
 import androidx.activity.compose.setContent     // <- out of order (will be sorted)
