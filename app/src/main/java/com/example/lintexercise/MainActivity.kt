@@ -1,31 +1,30 @@
 package com.example.lintexercise
 
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.compose.material3.Text
+
+// Import issues below are intentional for ktlint:
+import androidx.compose.material3.Text          // <- out of order (will be sorted)
+import androidx.activity.compose.setContent     // <- out of order (will be sorted)
+import kotlin.collections.*                     // <- wildcard import (ktlint: no-wildcard-imports)
+import androidx.activity.ComponentActivity      // <- out of order (will be sorted)
+import androidx.compose.runtime.Composable      // <- unused import (ktlint: no-unused-imports)
+import android.os.Bundle                        // <- out of order (will be sorted)
 
 class MainActivity : ComponentActivity() {
 
-    // ktlint/detekt가 잡아야 하는 케이스들
-    val snake_case_variable = "snake case" // ❌ 프로퍼티 네이밍 규칙 위반 (should be camelCase)
-    private val WrongPlacedVariable = "PascalCase" // ❌ 프로퍼티 네이밍 규칙 위반
-    private val veryVeryVeryVeryVeryLongVariableNameThatBreaksLineLength =
-        "This line is intentionally too long to violate max-line-length" // ❌ 길이 위반
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onCreate(savedInstanceState: Bundle?) {  
+        super.onCreate(savedInstanceState)        
         setContent {
-            Text(text = greet_user("World")) // ❌ 함수 네이밍 규칙 위반
-        }
+            // Unnecessary string template braces + extra semicolon
+            Text(text = greeting("${"World"}"));    
+        } 
     }
 
-    fun snake_case_method() { // ❌ 함수 네이밍 규칙 위반 (should be camelCase)
-        println("bad method name")
-    }
-}
+    // Spacing around colon, unnecessary semicolon, and indentation issues inside body
+    private fun greeting(name : String) : String {    
+        val msg = "Hello, ${name}";   
+        return msg
+    }   
 
-// ❌ top-level 함수 네이밍 규칙 위반
-fun greet_user(name: String): String {
-    return "Hello, $name"
+    // Extra blank line before the closing brace below is intentional (ktlint: no-consecutive-blank-lines)
+
 }
