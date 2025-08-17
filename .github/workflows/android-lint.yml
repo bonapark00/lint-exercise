@@ -25,4 +25,4 @@ jobs:
         run: ./gradlew lintDebug
 
       - name: ktlint check
-        run: ./gradlew :app:ktlintCheck
+        run: ./gradlew :app:ktlintMainSourceSetCheck
