@@ -8,24 +8,27 @@ plugins {
 }
 
 // 모든 하위 모듈(app 등)에 ktlint 적용 + 공통 설정
+// root gradle
 subprojects {
-    plugins.withId("org.jlleitschuh.gradle.ktlint") {
-        afterEvaluate {
-            extensions.configure<org.jlleitschuh.gradle.ktlint.KtlintExtension>("ktlint") {
-                android.set(true)
-                ignoreFailures.set(false)
+    plugins.apply("org.jlleitschuh.gradle.ktlint")
 
-                reporters {
-                    reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.PLAIN)
-                    reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.CHECKSTYLE)
-                }
+    extensions.configure<org.jlleitschuh.gradle.ktlint.KtlintExtension>("ktlint") {
+        android.set(true)
+        ignoreFailures.set(false)
 
-                filter {
-                    include("**/*.kt")
-                    exclude("**/src/test/**")
-                    exclude("**/src/androidTest/**") // <-- 실제로 제외되도록 보장
-                }
-            }
+        // 보고서 포맷
+        reporters {
+            reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.PLAIN)
+            reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.CHECKSTYLE)
+        }
+
+        // 검사 대상/제외 경로 (수정 필요)
+        filter {
+            include("**/src/main/kotlin/**/*.kt") // src/main/kotlin 경로의 kt 파일 포함
+            include("**/src/main/java/**/*.kt") // src/main/java 경로의 kt 파일 포함
+            exclude("**/build/**") // 빌드 경로는 항상 제외
+            exclude("**/src/test/**") // 테스트 코드는 제외 (선택 사항)
+            exclude("**/src/androidTest/**") // 안드로이드 테스트 코드는 제외 (선택 사항)
         }
     }
 }
