@@ -18,3 +18,16 @@ ktlint {
         reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.CHECKSTYLE)
     }
 }
+
+subprojects {
+    plugins.apply("org.jlleitschuh.gradle.ktlint")
+
+    extensions.configure<org.jlleitschuh.gradle.ktlint.KtlintExtension>("ktlint") {
+        android.set(true)
+        ignoreFailures.set(false)
+        reporters {
+            reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.PLAIN)
+            reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.CHECKSTYLE)
+        }
+    }
+}
