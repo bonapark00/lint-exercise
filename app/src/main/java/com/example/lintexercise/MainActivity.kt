@@ -7,23 +7,25 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.MaterialTheme
 
 class MainActivity : ComponentActivity() {
-
-    // ❌ Line 9: Class body should not start with blank line
+    // ❌ Lint: Class body should not start with a blank line
+    // (→ remove the empty line below this line)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
 
-            // ❌ Line 16: Missing newline after "("
-            // ❌ Line 16: Argument should be on a separate line (unless all arguments can fit a single line)
-            Text(text = "Hello", // ← starts arguments on same line as function call
-                style = MaterialTheme.typography.bodyLarge, // ❌ Line 17: Unexpected indentation (12) (should be 16)
-                maxLines = 1) // ❌ Line 18:
-                              //     - Missing newline before ")"
-                              //     - Missing trailing comma before ")"
-                              //     - Trailing space(s)
+            // ❌ Lint issues:
+            // - Missing newline after "("
+            // - Each argument should be on a separate line
+            // - Unexpected indentation (should be 16 spaces)
+            // - Missing newline before ")"
+            // - Missing trailing comma before ")"
+            // - Trailing spaces detected
+            Text(text = "Hello", // ← Arguments should not start on the same line as the function call
+                style = MaterialTheme.typography.bodyLarge, // ← Incorrect indentation
+                maxLines = 1) // ← Missing newline and trailing comma before ")"
 
-            // ✅ CORRECT formatting
+            // ✅ Correct formatting:
             Text(
                 text = "Hello",
                 style = MaterialTheme.typography.bodyLarge,
